@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // 为Telegram Bot webhook禁用CSRF保护
+        $middleware->validateCsrfTokens(except: [
+            '/telegram-bot/webhook',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
