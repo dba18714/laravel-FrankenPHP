@@ -1,0 +1,43 @@
+{
+  "name": "laravel-frankenphp-app",
+  "type": "docker",
+  "dockerfile": "Dockerfile",
+  "buildArgs": {
+    "BUILDKIT_INLINE_CACHE": "1"
+  },
+  "ports": [
+    {
+      "port": 8080,
+      "type": "http"
+    }
+  ],
+  "environment": {
+    "APP_ENV": "production",
+    "APP_DEBUG": "false",
+    "APP_URL": "https://{{ZEABUR_URL}}",
+    "OCTANE_SERVER": "frankenphp",
+    "SERVER_NAME": ":8080",
+    "DB_CONNECTION": "sqlite",
+    "DB_DATABASE": "/app/database/database.sqlite",
+    "SESSION_DRIVER": "file",
+    "CACHE_DRIVER": "file",
+    "QUEUE_CONNECTION": "sync"
+  },
+  "domains": [],
+  "volumes": [
+    {
+      "name": "storage",
+      "mountPath": "/app/storage"
+    }
+  ],
+  "healthcheck": {
+    "path": "/",
+    "interval": 30,
+    "timeout": 10,
+    "retries": 3
+  },
+  "resources": {
+    "cpu": "0.1",
+    "memory": "512Mi"
+  }
+} 
