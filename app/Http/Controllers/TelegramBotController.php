@@ -87,6 +87,8 @@ class TelegramBotController extends Controller
         try {
             $webhookUrl = config('telegram.webhook_url');
             $result = $this->telegram->setWebhook($webhookUrl);
+
+            Log::info('Telegram Bot setWebhook result:', $result);
             
             if ($result) {
                 return response()->json([
